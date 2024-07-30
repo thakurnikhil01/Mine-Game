@@ -19,4 +19,5 @@ A simple "Mine Game" built with HTML, CSS, and JavaScript. In this game, users i
 2. Avoid red cards to prevent a game over scenario.
 3. When a red card is clicked, a "Game Over" message is shown, and all cards are hidden.
 
-![Screenshot 2024-07-30 163937](https://github.com/user-attachments/assets/2dff267d-2db7-4f9e-b41f-a11b9551a674)
+![image](https://github.com/user-attachments/assets/bd21658b-57b7-49d1-98cb-8fc345b384aa)
+
