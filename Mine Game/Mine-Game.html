@@ -8,70 +8,70 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        * {
+        *{
             box-sizing: border-box;
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
 
-        header {
-            height: 6rem;
+        header{
+            height: 8rem;
             width: 100%;
-            text-align: center;
             font-size: 5rem;
-            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: "Press Start 2P", system-ui;
             font-weight: 400;
             font-style: normal;
+            margin-top: 3rem;
+            color: white;
         }
 
-        body {
+        body{
             display: flex;
-            justify-content: space-around;
             flex-wrap: wrap;
-            background-image: url("./360_F_88981880_YjJManMJ6hJmKr5CZteFJAkEzXIh8mxW.jpg");
+            justify-content: space-around;
+            background-image: url(./tumblr_ok795yIIQm1tf8wxpo1_1280.gif);
             background-size: cover;
-            position: relative;
         }
 
-        .container {
-            margin-top: 80px;
-            grid-template-columns: repeat(3, 1fr);
+        .container{
             width: 600px;
             display: grid;
-            justify-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 3rem;
+            margin-left: -50px;
         }
 
-        .red {
+        .card{
+            height: 10rem;
+            width: 10rem;
+            border: 1px solid white;
+            margin: 1rem;
+        }
+
+        .green{
+            background-color: purple;
+            box-shadow: 0px 0px 6px 5px purple;
+        }
+
+        .red{
             background-color: red;
             box-shadow: 0px 0px 6px 5px red;
         }
 
-        .blue {
-            background-color: blue;
-            box-shadow: 0px 0px 6px 5px blue;
-        }
-
-        .card {
-            border: 2px solid black;
-            margin: 0.8rem;
-            height: 10rem;
-            width: 10rem;
-        }
-
-        .game-over {
+        .game-over, .win-message{
             display: none;
             position: absolute;
             margin-top: 400px;
-            /* top: 50%;
-            left: 50%; */
-            /* transform: translate(-50%, -50%); */
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+            text-align: center;
+            color: black;
             font-size: 3rem;
             font-family: "Press Start 2P", system-ui;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 2rem;
-            border-radius: 1rem;
+            padding: 4rem;
         }
     </style>
 </head>
@@ -80,39 +80,51 @@
 </header>
 <body>
     <div class="container">
-        <div class="card" data-color="blue"></div>
-        <div class="card" data-color="blue"></div>
-        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="green"></div>
+        <div class="card" data-color="green"></div>
+        <div class="card" data-color="green"></div>
+        <div class="card" data-color="green"></div>
         <div class="card" data-color="red"></div>
-        <div class="card" data-color="blue"></div>
-        <div class="card" data-color="blue"></div>
-        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="green"></div>
+        <div class="card" data-color="green"></div>
+        <div class="card" data-color="green"></div>
         <div class="card" data-color="red"></div>
-        <div class="card" data-color="blue"></div>
     </div>
-    <div id="game-over" class="game-over">Game Over</div>
-    <script>
-        let card = document.querySelectorAll('.card')
-        let gameOverMessage = document.getElementById('game-over')
-
-        card.forEach(function(cards){
-            cards.addEventListener('click', function(e){
-                let dataColor = e.currentTarget.getAttribute('data-color')
-
-                if(dataColor == 'red'){
-                    gameOverMessage.style.display = 'flex'
-
-                    card.forEach(function(c){
-                        c.style.display = 'none'
-                    })
-                }
-
-                else{
-                    e.currentTarget.classList.add(dataColor)
-                    e.currentTarget.setAttribute('data-color', 'used')
-                }
-            })
-        })
-    </script>
+    <div class="game-over" id="game-over">Game Over</div>
+    <div class="win-message" id="win-message">You Won the Game!</div>
 </body>
+
+<script>
+    let card = document.querySelectorAll('.card')
+    let gameOverMessage = document.getElementById('game-over')
+    let winMessage = document.getElementById('win-message')
+
+    let totalGreenCards = document.querySelectorAll('.card[data-color = "green"]').length
+    let clickedGreenCards = 0
+
+    card.forEach(function(cards){
+        cards.addEventListener('click', function(e){
+            let data = e.currentTarget.getAttribute('data-color')
+
+            if(data == "red"){
+                gameOverMessage.style.display = 'flex'
+
+                card.forEach(function(i){
+                    i.style.display = 'none'
+                })
+            }
+            else if(data == 'green'){
+                e.currentTarget.classList.add(data)
+                e.currentTarget.setAttribute('data-color', 'used')
+                clickedGreenCards++
+            }
+            if(clickedGreenCards == totalGreenCards){
+                winMessage.style.display = 'flex'
+                card.forEach(function(i){
+                    i.style.display = 'none'
+                })
+            }
+        })
+    })
+</script>
 </html>
