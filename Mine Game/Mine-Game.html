@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            height: 6rem;
+            width: 100%;
+            text-align: center;
+            font-size: 5rem;
+            margin-top: 3rem;
+            font-family: "Press Start 2P", system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-image: url("./360_F_88981880_YjJManMJ6hJmKr5CZteFJAkEzXIh8mxW.jpg");
+            background-size: cover;
+            position: relative;
+        }
+
+        .container {
+            margin-top: 80px;
+            grid-template-columns: repeat(3, 1fr);
+            width: 600px;
+            display: grid;
+            justify-items: center;
+        }
+
+        .red {
+            background-color: red;
+            box-shadow: 0px 0px 6px 5px red;
+        }
+
+        .blue {
+            background-color: blue;
+            box-shadow: 0px 0px 6px 5px blue;
+        }
+
+        .card {
+            border: 2px solid black;
+            margin: 0.8rem;
+            height: 10rem;
+            width: 10rem;
+        }
+
+        .game-over {
+            display: none;
+            position: absolute;
+            margin-top: 400px;
+            /* top: 50%;
+            left: 50%; */
+            /* transform: translate(-50%, -50%); */
+            font-size: 3rem;
+            font-family: "Press Start 2P", system-ui;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<header>
+    <div class="name">Mine Game</div>
+</header>
+<body>
+    <div class="container">
+        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="red"></div>
+        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="blue"></div>
+        <div class="card" data-color="red"></div>
+        <div class="card" data-color="blue"></div>
+    </div>
+    <div id="game-over" class="game-over">Game Over</div>
+    <script>
+        let card = document.querySelectorAll('.card')
+        let gameOverMessage = document.getElementById('game-over')
+
+        card.forEach(function(cards){
+            cards.addEventListener('click', function(e){
+                let dataColor = e.currentTarget.getAttribute('data-color')
+
+                if(dataColor == 'red'){
+                    gameOverMessage.style.display = 'flex'
+
+                    card.forEach(function(c){
+                        c.style.display = 'none'
+                    })
+                }
+
+                else{
+                    e.currentTarget.classList.add(dataColor)
+                    e.currentTarget.setAttribute('data-color', 'used')
+                }
+            })
+        })
+    </script>
+</body>
+</html>
